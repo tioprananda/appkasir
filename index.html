@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./assets/bootstrap-5.1.3-dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./assets/fontawesome-free-6.2.1-web/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/main.css">
+</head>
+
+<body style="background-color: #f2f3f4;">
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <div style="display: inline-block; color: aliceblue">
+      <img src="" width="30" height="30" id="store-logo" alt="" style="margin-left: 10px">
+      <span id="store-name" class="ms-2" style="font-size: 14.5px">My Store</span>
+    </div>
+    <div style="display: inline-block">
+      <!-- awal button user -->
+      <div class="dropdown" style="display: inline">
+        <a href="#" class="btn btn-sm btn-dark" style="background-color :#2ecc71;" id="userInfoDropdown" role="button" data-bs-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user"></i>
+          <span id="userFirstName">User</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end dropdown-light" style="width: 350px"
+          aria-labelledby="userInfoDropdown">
+          <div class="dropdown-body">
+            <table class="table table-sm table-bordered"
+              style="font-size: 13px; border-radius: 100%; text-align: center">
+              <thead class="thead-light">
+                <tr>
+                  <th>Access Level</th>
+                  <th>Position</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="userAccessLevel"></td>
+                  <td id="userPosition"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- akhir button user -->
+
+      <!-- awal button pengaturan -->
+      <div class="dropdown" style="display: inline">
+        <a href="#" class="btn btn-sm btn-secondary" id="settingDropdown" role="button" data-bs-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-cog"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end dropdown-light" style="font-size: 14px;"
+          aria-labelledby="settingDropdown">
+          <a class="dropdown-item" id="user-setting" onclick="setting('user')" href="#">
+            <i class="fa fa-users"></i> User Setting
+          </a>
+       
+          
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" id="store-profil-setting" onclick="setting('profil')" href="#">
+            <i class="fa fa-building"></i> Company Profile
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" id="general-setting" onclick="setting('general')" href="#">
+            <i class="fa fa-cogs"></i> Pengaturan Pajak
+          </a>
+          </div>
+        </div>
+        <!-- akhir button pengaturan -->
+
+        <!-- awal button close, minimize, signout -->
+        <button class="btn btn-sm btn-secondary" onclick="logout()"><i class="fa fa-sign-out-alt"></i></button>
+        <button class="btn btn-sm btn-secondary" onclick="winMinimize()"><i class="fa fa-window-minimize"></i></button>
+        <button class="btn btn-sm btn-danger me-2" onclick="winClose()"><i class="fa fa-times"></i></button>
+        <!-- akhir button close, minimize, signout -->
+      </div>
+    </div>
+  </nav>
+
+<!-- awal menu content -->
+<div style="padding: 70px 20px 20px 20px;">
+<div class="d-flex justify-content-center gap-4 flex-wrap">
+  <div class="col-md-3">
+    <div class="box-menu">
+      <a href="#" onclick="cashier()" class="menu-link">
+        <img src="./assets/img/icons/mesin.png" alt="mesinkasir">
+      </a>
+      <div class="box-menu-title">Kasir</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="box-menu">
+      <a href="#" class="menu-link" onclick="salesData()">
+        <img src="./assets/img/icons/trolley.png" alt="mesinkasir">
+      </a>
+      <div class="box-menu-title">Data Penjualan</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="box-menu">
+      <a href="#" class="menu-link" onclick="salesReport()">
+        <img src="./assets/img/icons/health-check.png" alt="mesinkasir">
+      </a>
+      <div class="box-menu-title">Laporan Penjualan</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="box-menu">
+      <a href="#" class="menu-link" onclick="chart()">
+        <img src="./assets/img/icons/pie-chart.png" alt="mesinkasir">
+      </a>
+      <div class="box-menu-title">Grafik</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="box-menu">
+      <a href="#" class="menu-link" onclick="product()">
+        <img src="./assets/img/icons/stock.png" alt="mesinkasir">
+      </a>
+      <div class="box-menu-title">Data Produk</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="box-menu">
+      <a href="#" class="menu-link" onclick="buyer()">
+        <img src="./assets/img/icons/team.png" alt="mesinkasir">
+      </a>
+      <div class="box-menu-title">Data Customer</div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- akhir menu content -->
+
+  <script src="./assets/jquery/jquery.min.js"></script>
+  <script src="./assets/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+  <script>
+    // panggil electron
+    const electron = require('electron')
+    const {ipcRenderer} = electron
+
+    // render halaman baru kketika link produckt di klik
+    product = () => {
+      ipcRenderer.send('load:product-window')
+    }
+    // render halaman baru kketika link kasir di klik
+    cashier = () => {
+      ipcRenderer.send('load:cashier-window')
+    }
+    // render halaman baru ketika link data penjualan di klik
+    salesData = () => {
+      ipcRenderer.send('load:sales-data-window')
+    }
+    // render halaman baruk ketika link laporan penjualan di klik
+    salesReport = () => {
+      ipcRenderer.send('load:sales-report-window')
+    }
+   // render halaman baru ketika link grafik di klik
+   chart = () => {
+      ipcRenderer.send('load:chart-window')
+    }
+   // render halaman baru ketika link customer di klik
+   buyer = () => {
+      ipcRenderer.send('load:buyer-window')
+    }
+      // render halaman setting user ketika setting di klik
+   setting = (param) => {
+      ipcRenderer.send('load:setting', param)
+    }
+
+    // render minimize window dan close
+    winMinimize = () => {
+      ipcRenderer.send('window:minimize')
+    }
+
+    winClose = () => {
+      ipcRenderer.send('window:close')
+    }
+
+      // render halaman overlay login ketika home
+      ipcRenderer.on('load:overlay', (e, storeObject) => {
+        let overlay = `<div class='overlay'></div>`
+        $('body').prepend(overlay)
+        $('#store-name').html(storeObject.name)
+        if(storeObject.logo == null ||storeObject.logo == ""){
+            $('#store-logo').attr('src', `./assets/img/logo/shop.png`)
+          } else {
+            $('#store-logo').attr('src', `./assets/img/logo/${storeObject.logo}`)
+          }
+      })
+      unCurtain = (storeObject, userFirstName, userPosition, userAccessLevel) => {
+        $('.overlay').addClass('out')
+        $('.overlay').removeClass('in')
+        $('#store-name').html(storeObject.name)
+        $('#userFirstName').html(userFirstName)
+        $('#userPosition').html(userPosition)
+        $('#userAccessLevel').html(userAccessLevel)
+        switch(userAccessLevel){
+          case 'main_user' :
+            $('#general-setting, #store-profil-setting').removeClass('disabled')
+            break;
+          default :
+            $('#general-setting, #store-profil-setting').addClass('disabled')
+            break;
+          } 
+
+          if(storeObject.logo == null ||storeObject.logo == ""){
+            $('#store-logo').attr('src', `./assets/img/logo/shop.png`)
+          } else {
+            $('#store-logo').attr('src', `./assets/img/logo/${storeObject.logo}`)
+          }
+      }
+      ipcRenderer.on('unlock:app', (e, storeObject, userId, firstName, position, accessLevel) => {
+        unCurtain(storeObject, firstName, position, accessLevel)
+      })
+
+      // fungsi logout
+      logout = () => {
+        $('.overlay').addClass('in')
+        $('.overlay').removeClass('out')
+        ipcRenderer.send('submit:logout')
+      }
+  </script>
+</body>
+
+</html>

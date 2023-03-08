@@ -1,0 +1,17 @@
+1. user level admin tidak boleh mengakses fitur pengaturan toko. (#DONE)
+2. form login, tombol login dan close jadikan flex sejajar kiri kanan (#DONE)
+3. halaman kasir, tombol close modal box tidak berfungsi (#DONE)
+3. halaman kasir, menu tambah kode/barcode munculkan search otomatis nama barcode ketika diketik (#DONE)
+4. halaman kasir, menu tambah kode/barcode ketika diinput sekali lagi, qty belanja + 1 (#DONE)
+5. halaman kasir, tampilkan kolom barcode di table penjualan kasir (#DONE)
+5. halaman kasir, ketika input belanja secara manual atau scan, munculkan question tambah data sebelum diinput (#DONE)
+7. halaman data penjualan, export file pdf dan csv, print (#DONE)
+8. halaman data penjualan, tampilkan kolom barcode (#DONE)
+10. halaman data penjulan, tampilkan search berdasarkan barcode (#DONE)
+11. halaman produk, jika stok akhir kurang dari 0 maka angka stock akhir jadi merah (#DONE)
+12. halaman produk, tampilkan search value berdasarkan kolom stock akhir
+13. halaman produk, tampilkan hasil stock akhir ke csv, pdf dan print
+14. halaman produk, ketika barcode yang sudah ada diinput lagi, maka munculkan search value otomatis. (#DONE)
+15. halaman produk, ketika barcode yang sudah ada diinput lagi, maka input khusus stock awal saja (#DONE)
+16. halaman produk, ketika barcode yang suda ada diinput lagi, ketika disubmit, tidak akan menambah kolom/produkcode baru, melainkan menimpa data lama dan hanya     menambahkan value stock awal baru yang akan bertambah otomatis dgn stock awal lama kedalam database. (#DONE)
+17. halaman produk, penyesuaian option kategori dan satuan sesuai keinginan customer

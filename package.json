@@ -1,0 +1,25 @@
+{
+  "name": "appkasir",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "package-win": "electron-packager . --overwrite --platform-win32 --arch=x64 --icon=assets/img/icons/cashier-logo.ico --prune=true --out=release-builds"
+  },
+  "author": "tyo",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^22.2.0",
+    "electron-packager": "^17.1.1"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.0.9",
+    "fs": "0.0.1-security",
+    "imask": "^6.4.3",
+    "md5": "^2.3.0",
+    "path": "^0.12.7",
+    "sqlite3": "^5.1.4",
+    "url": "^0.11.0"
+  }
+}
